@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mis ingresos</title>
+</head>
+<body>
+
+    <h1>Mis ingresos</h1>
+
+    {% for ingreso in ingresos %}
+        <div>
+            <p>Monto: {{ ingreso.monto }}</p>
+            <p>Fecha: {{ ingreso.fecha }}</p>
+            <p>Descripción: {{ ingreso.descripcion }}</p>
+            <p>Categoría: {{ ingreso.categoria.nombre }}</p>
+
+        <a href="{{ url_for('ingresos.editar', id_ingreso=ingreso.id_ingreso) }}">
+            Editar
+        </a>    
+
+        <form method="POST" action="{{ url_for('ingresos.eliminar', id_ingreso=ingreso.id_ingreso) }}">
+            <button type="submit">Eliminar</button>
+        </form>
+        </div>
+
+        <hr>
+
+    {% else %}
+        <p>No hay ingresos registrados.</p>
+    {% endfor %}
+
+</body>
+</html>

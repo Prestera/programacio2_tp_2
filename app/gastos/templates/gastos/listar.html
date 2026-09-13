@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mis gastos</title>
+</head>
+<body>
+
+    <h1>Mis gastos</h1>
+
+    {% for gasto in gastos %}
+        <div>
+            <p>Monto: {{ gasto.monto }}</p>
+            <p>Fecha: {{ gasto.fecha }}</p>
+            <p>Descripción: {{ gasto.descripcion }}</p>
+            <p>Categoría: {{ gasto.categoria.nombre }}</p>
+
+            <a href="{{ url_for('gastos.editar', id_gasto=gasto.id_gasto) }}">
+                Editar
+            </a>
+            <form method="POST" action="{{ url_for('gastos.eliminar', id_gasto=gasto.id_gasto) }}">
+                <button type="submit">Eliminar</button>
+            </form>
+        </div>
+
+        <hr>
+
+    {% else %}
+        <p>No hay gastos registrados.</p>
+    {% endfor %}
+
+</body>
+</html>
